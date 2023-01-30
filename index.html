@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Etch a Sketch</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="menu-bar">
+            <ul>
+                <li><a id="new-menu-item" href="#">New</a></li>
+                <li><a id="save-menu-item" href="#">Save</a></li>
+                <li><a id="erase-menu-item" href="#">Erase</a></li>
+            </ul>
+            <div id="rightmost-item"><a id="about-menu-item" href="#">Etch a Sketch</a></div>
+        </div>
+
+        <div class="canvas-group">
+            <div class="canvas-side-bar">
+                <div class="color-picker" id="selected-color"></div>
+                <div class="color-picker white"></div>
+                <div class="color-picker black"></div>
+                <div class="color-picker grey"></div>
+                <div class="color-picker red"></div>
+                <div class="color-picker orange"></div>
+                <div class="color-picker yellow"></div>
+                <div class="color-picker greenyellow"></div>
+                <div class="color-picker green"></div>
+                <div class="color-picker cyan"></div>
+                <div class="color-picker blue"></div>
+                <div class="color-picker purple"></div>
+                <div class="color-picker pink"></div>
+            </div>
+            <div class="canvas" draggable="false">
+                <div class="grid-container"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            The Odin Project
+        </div>
+    </div>
+
+    <dialog id="new-dialog">
+        <form method="dialog">
+            <label>Select grid size:
+                <select id="select-grid-size">
+                    <option value="140x100">Short (140 x 100)</option>
+                    <option value="220x100">Long (220 x 100)</option>
+                </select>
+            </label>
+            <div class="button-group">
+                <button id="new-cancel" value="cancel">Cancel</button>
+                <button id="new-confirm" value="default">Confirm</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="about-dialog">
+        <p class="about-message">Etch a Sketch (The Odin Project) - by Flávio</p>
+        <form method="dialog">
+          <button id="close-about">OK</button>
+        </form>
+    </dialog>
+
+    <dialog id="no-drawing-dialog">
+        <p class="no-drawing-message">No drawing exists!</p>
+        <form method="dialog">
+          <button id="close-no-drawing">OK</button>
+        </form>
+    </dialog>
+
+    <a id="aDownloadFile" download></a>
+</body>

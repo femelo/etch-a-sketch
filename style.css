@@ -1,0 +1,264 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+/* Containers */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: stretch;
+    width: 100vw;
+    height: 98vh;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(27, 55, 139);
+    font-family: roboto;
+    font-size: 20px;
+    margin-bottom: auto;
+}
+
+.canvas {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-grow: 1;
+    /* height: 800; */
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 10px; */
+    background-color: rgb(51, 51, 51);
+    color: rgb(221, 221, 221);
+    font-family: roboto;
+    font-size: 24px;
+    height: 5vh;
+}
+
+/* UI elements */
+ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    list-style: none;
+    padding: 0px 0px;
+    margin: 0px 0px;
+}
+
+li {
+    margin: 0px 0px;
+    padding: 0px 0px;
+    flex-basis: 20vw;
+}
+
+li:hover {
+    background-color: rgb(70, 113, 241);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    margin: 0px 2vw;
+    padding: 0px 0px;
+    flex-basis: 15vw;
+}
+
+#rightmost-item {
+    color: white;
+    margin: 0px 5vw;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#rightmost-item:hover {
+    background-color: rgb(70, 113, 241);
+}
+
+dialog {
+    border: solid 1px rgb(27, 55, 139, 0.6);
+    border-radius: 10px;
+    font-family: roboto;
+    color:rgb(27, 55, 139);
+}
+
+.about-message, .no-drawing-message {
+    display: block;
+    font-size: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    margin: 10px 10px;
+    font-family: roboto;
+    font-size: 20px;
+}
+
+select {
+    margin: 10px 10px;
+    padding: 4px 4px;
+    font-family: roboto;
+    font-size: 16px;
+}
+
+button {
+    background-color: rgb(27, 55, 139);
+    color: white;
+    font-family: roboto;
+    font-size: 14px;
+    margin: 8px;
+    padding: 8px 24px;
+    border-radius: 8px;
+    outline-color: white;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#close-about, #close-no-drawing {
+    max-width: 100px;
+}
+
+/* Canvas elements */
+.canvas-group {
+    display: flex;
+    justify-items: flex-start;
+    align-items: stretch;
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.canvas-side-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 10px;
+    width: 40px;
+    background-color: rgb(170, 170, 170);
+    gap: 10px;
+}
+
+.canvas {
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    align-items: flex-start;
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    min-height: 0;
+    border: 1px dashed rgba(128, 128, 128, 0);
+}
+
+.grid-row {
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0;
+}
+
+.grid-cell {
+    margin: 0;
+    padding: 0;
+    /* border: 0.5px solid grey; */
+    border: none;
+    width: 8px;
+    height: 8px;
+}
+
+.color-picker {
+    border: 2px solid rgb(215, 215, 215);
+    width: 30px;
+    height: 30px;
+    box-sizing: content-box;
+}
+
+.color-picker:hover {
+    border: 2px solid white;
+}
+
+#selected-color {
+    border: 2px double white;
+    margin-bottom: 36px;
+}
+
+.white {
+    background-color: white;
+}
+
+.black {
+    background-color: black;
+}
+
+.grey {
+    background-color: grey;
+}
+
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.greenyellow {
+    background-color: greenyellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.cyan {
+    background-color: cyan;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.pink {
+    background-color: pink;
+}
