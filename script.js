@@ -1,3 +1,4 @@
+// UI elements
 const newMenuItem = document.querySelector("a[id=new-menu-item]");
 const saveMenuItem = document.querySelector("a[id=save-menu-item]");
 const eraseMenuItem = document.querySelector("a[id=erase-menu-item]");
@@ -24,6 +25,7 @@ let selectedColor = "black";
 let drawingAvailable = false;
 
 // Add listeners
+// For menu items
 newMenuItem.addEventListener("click", () => newDialog.showModal());
 saveMenuItem.addEventListener("click", () => {
     if (drawingAvailable) {
@@ -49,8 +51,9 @@ eraseMenuItem.addEventListener("click", () => {
     }
 })
 aboutMenuItem.addEventListener("click", () => aboutDialog.showModal());
+// For color pickers
 colorSquares.forEach((item) => item.addEventListener("click", pickColor));
-
+// For button to confirm grid creation
 newConfirmButton.addEventListener("click", () => {
     const dimensions = selectGridSize.value.split('x');
     gridWidth = Number(dimensions[0]);
@@ -58,14 +61,15 @@ newConfirmButton.addEventListener("click", () => {
     createCellGrid(gridWidth, gridHeight);
 })
 
-// Pick color
+// Callbacks
+// To pick color
 function pickColor(e) {
     selectedColor = e.target.classList[1];
     selectedColorSquare.classList.remove(selectedColorSquare.classList[1]);
     selectedColorSquare.classList.add(selectedColor);
 }
 
-// Key down
+// To color a grid cell (mouse over + mouse button 1 down)
 function colorCell(e) {
     if (e.buttons === 1 || e.type === "click" || e.type === "mousedown") {
         e.target.classList.remove(e.target.classList[1]);
@@ -73,7 +77,8 @@ function colorCell(e) {
     }
 }
 
-// Create grid
+// Helper functions
+// Create cell grid
 function createCellGrid(width, height) {
     // Remove old cells
     const gridRows = document.querySelectorAll(".grid-row");
@@ -104,6 +109,8 @@ function createCellGrid(width, height) {
     drawingAvailable = true;
 }
 
+// Shows a 'save file' window. It works in Chrome.
+// In Firefox it will download the file without opening the window.
 function saveFile(contents) {
     filename = 'Untitled.bmp';
     const opts = {type: 'image/bmp'};
@@ -113,11 +120,12 @@ function saveFile(contents) {
     aDownloadFile.click();
 };
 
+// Get array of pixel colors (Bitmap format)
 function getArray() {
     if (!drawingAvailable) {
         return null;
     }
-    // Array of strings
+    // Array of pixel colors (integers to represent bytes + padding)
     const bitMapArray = [];
     // Get rows
     const gridRows = Array.from(document.querySelectorAll("div[class=grid-row]"));
@@ -125,6 +133,8 @@ function getArray() {
         .forEach(function(index) {
             bitMapArray.push([]);
             const cells = Array.from(gridRows[index].children);
+            // Bitmap row size (not the row size of the pixel color array)
+            // This is used to calculate the required padding bytes.
             const bmpRowSize = Math.ceil(24 * cells.length / 32) * 4;
             let numBytes = 0;
             for (let i = 0; i < cells.length; i++) {
@@ -196,14 +206,14 @@ function generateBmp(arr) {
         "data": new Uint8Array(offset + totalLength)
     }
   
-    //BMP Header
+    // BMP Header
     assign(dataObject, "B".charCodeAt(0), 1);
     assign(dataObject, "M".charCodeAt(0), 1);      // ID field
     assign(dataObject, offset + totalLength, 4);   // BMP size
     assign(dataObject, 0, 4);                      // unused
     assign(dataObject, offset, 4);                 // pixel data offset
     
-    //DIB Header                     
+    // DIB Header                     
     assign(dataObject, 40, 4);                     // DIB header length
     assign(dataObject, width, 4);                  // image width
     assign(dataObject, height, 4);                 // image height
