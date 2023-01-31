@@ -1,7 +1,7 @@
 // UI elements
 const newMenuItem = document.querySelector("a[id=new-menu-item]");
 const saveMenuItem = document.querySelector("a[id=save-menu-item]");
-const eraseMenuItem = document.querySelector("a[id=erase-menu-item]");
+const clearMenuItem = document.querySelector("a[id=clear-menu-item]");
 const aboutMenuItem = document.querySelector("a[id=about-menu-item]");
 const newDialog = document.querySelector("dialog[id=new-dialog]");
 const noDrawingDialog = document.querySelector("dialog[id=no-drawing-dialog]");
@@ -21,6 +21,7 @@ selectedColorSquare.classList.add("black");
 // Global variables
 const gridWidthPx = 1120;
 const gridHeightPx = 800;
+const colorList = ["grey", "red", "orange", "yellow", "greenyellow", "green", "cyan", "blue", "purple", "pink"];
 let selectedColor = "black";
 let drawingAvailable = false;
 
@@ -35,7 +36,7 @@ saveMenuItem.addEventListener("click", () => {
         noDrawingDialog.showModal();
     }
 });
-eraseMenuItem.addEventListener("click", () => {
+clearMenuItem.addEventListener("click", () => {
     if (drawingAvailable) {
         // Color all cells in white
         const gridCells = document.querySelectorAll(".grid-cell");
@@ -71,11 +72,18 @@ function pickColor(e) {
 function colorCell(e) {
     if (e.buttons === 1 || e.type === "click" || e.type === "mousedown") {
         e.target.classList.remove(e.target.classList[2]);
-        e.target.classList.add(selectedColor);
+        const color = (selectedColor === "random")? getRandomColor() : selectedColor;
+        e.target.classList.add(color);
     }
 }
 
 // Helper functions
+// Get random color
+function getRandomColor() {
+    const index = Math.floor(colorList.length * Math.random());
+    return colorList[index];
+}
+
 // Create cell grid
 function createCellGrid(cellWidthPx, cellHeightPx) {
     const width = gridWidthPx / cellWidthPx;
@@ -107,6 +115,7 @@ function createCellGrid(cellWidthPx, cellHeightPx) {
             row.appendChild(cell);
             cell.addEventListener("mousedown", colorCell);
             cell.addEventListener("mouseover", colorCell);
+            cell.addEventListener("touchmove", colorCell);
             cell.addEventListener("mousemove", () => false);
             cell.addEventListener('dragstart', (e) => e.preventDefault());
             cell.addEventListener('drop', (e) => e.preventDefault());
