@@ -11,7 +11,7 @@ const gridContainer = document.querySelector("div[class=grid-container]");
 const newCancelButton = document.querySelector("button[id=new-cancel]");
 const newConfirmButton = document.querySelector("button[id=new-confirm]");
 
-const selectGridSize = document.querySelector("select[id=select-grid-size]");
+const selectPixelSize = document.querySelector("select[id=select-pixel-size]");
 
 const selectedColorSquare = document.querySelector("div[id=selected-color]");
 const colorSquares = Array.from(document.getElementsByClassName("color-picker")).slice(1);
@@ -19,8 +19,8 @@ const colorSquares = Array.from(document.getElementsByClassName("color-picker"))
 selectedColorSquare.classList.add("black");
 
 // Global variables
-let gridWidth = 0;
-let gridHeight = 0;
+const gridWidthPx = 1120;
+const gridHeightPx = 800;
 let selectedColor = "black";
 let drawingAvailable = false;
 
@@ -40,10 +40,10 @@ eraseMenuItem.addEventListener("click", () => {
         // Color all cells in white
         const gridCells = document.querySelectorAll(".grid-cell");
         for (const cell of gridCells) {
-            if (cell.classList[1] === "white") {
+            if (cell.classList[2] === "white") {
                 continue;
             }
-            cell.classList.remove(cell.classList[1]);
+            cell.classList.remove(cell.classList[2]);
             cell.classList.add("white");
         }
     } else {
@@ -55,10 +55,8 @@ aboutMenuItem.addEventListener("click", () => aboutDialog.showModal());
 colorSquares.forEach((item) => item.addEventListener("click", pickColor));
 // For button to confirm grid creation
 newConfirmButton.addEventListener("click", () => {
-    const dimensions = selectGridSize.value.split('x');
-    gridWidth = Number(dimensions[0]);
-    gridHeight = Number(dimensions[1]);
-    createCellGrid(gridWidth, gridHeight);
+    const cellDimensions = selectPixelSize.value.split('x').map(Number);
+    createCellGrid(cellDimensions[0], cellDimensions[1]);
 })
 
 // Callbacks
@@ -72,18 +70,27 @@ function pickColor(e) {
 // To color a grid cell (mouse over + mouse button 1 down)
 function colorCell(e) {
     if (e.buttons === 1 || e.type === "click" || e.type === "mousedown") {
-        e.target.classList.remove(e.target.classList[1]);
+        e.target.classList.remove(e.target.classList[2]);
         e.target.classList.add(selectedColor);
     }
 }
 
 // Helper functions
 // Create cell grid
-function createCellGrid(width, height) {
+function createCellGrid(cellWidthPx, cellHeightPx) {
+    const width = gridWidthPx / cellWidthPx;
+    const height = gridHeightPx / cellHeightPx;
     // Remove old cells
     const gridRows = document.querySelectorAll(".grid-row");
     for (const row of gridRows) {
         row.remove();
+    }
+    // Select class
+    let sizeClass = "small";
+    if (cellWidthPx === 16 && cellHeightPx === 16) {
+        sizeClass = "medium";
+    } else if (cellWidthPx === 32 && cellHeightPx === 32) {
+        sizeClass = "large";
     }
     // Create new cells
     for (let i = 0; i < height; i++) {
@@ -93,6 +100,7 @@ function createCellGrid(width, height) {
         for (let j = 0; j < width; j++) {
             const cell = document.createElement("div");
             cell.classList.add("grid-cell");
+            cell.classList.add(sizeClass);
             cell.classList.add("white");
             cell.id = `(${i},${j})`;
             cell.draggable = false;

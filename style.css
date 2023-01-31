@@ -194,9 +194,22 @@ button {
     margin: 0;
     padding: 0;
     border: none;
+    cursor: url("./image/pencil_32x32.png") 1 30, auto;
+}
+
+.small {
     width: 8px;
     height: 8px;
-    cursor: url("./image/pencil_32x32.png") 1 30, auto;
+}
+
+.medium {
+    width: 16px;
+    height: 16px;
+}
+
+.large {
+    width: 32px;
+    height: 32px;
 }
 
 .color-picker {
