@@ -59,6 +59,8 @@ newConfirmButton.addEventListener("click", () => {
     const cellDimensions = selectPixelSize.value.split('x').map(Number);
     createCellGrid(cellDimensions[0], cellDimensions[1]);
 })
+// For touch screens
+gridContainer.addEventListener("touchmove", colorCellByTouch);
 
 // Callbacks
 // To pick color
@@ -74,6 +76,18 @@ function colorCell(e) {
         e.target.classList.remove(e.target.classList[2]);
         const color = (selectedColor === "random")? getRandomColor() : selectedColor;
         e.target.classList.add(color);
+    }
+}
+
+// To color a grid cell (touch move)
+function colorCellByTouch(e) {
+    e.preventDefault();
+    // Get the touch element
+    for (const touch of e.touches) {
+        const gridCell = document.elementFromPoint(touch.clientX, touch.clientY);
+        gridCell.classList.remove(gridCell.classList[2]);
+        const color = (selectedColor === "random")? getRandomColor() : selectedColor;
+        gridCell.classList.add(color);
     }
 }
 
@@ -115,7 +129,6 @@ function createCellGrid(cellWidthPx, cellHeightPx) {
             row.appendChild(cell);
             cell.addEventListener("mousedown", colorCell);
             cell.addEventListener("mouseover", colorCell);
-            cell.addEventListener("touchmove", colorCell);
             cell.addEventListener("mousemove", () => false);
             cell.addEventListener('dragstart', (e) => e.preventDefault());
             cell.addEventListener('drop', (e) => e.preventDefault());
