@@ -1,8 +1,8 @@
 // UI elements
-const newMenuItem = document.querySelector("a[id=new-menu-item]");
-const saveMenuItem = document.querySelector("a[id=save-menu-item]");
-const clearMenuItem = document.querySelector("a[id=clear-menu-item]");
-const aboutMenuItem = document.querySelector("a[id=about-menu-item]");
+const newMenuItem = document.querySelector("li[id=new-menu-item]");
+const saveMenuItem = document.querySelector("li[id=save-menu-item]");
+const clearMenuItem = document.querySelector("li[id=clear-menu-item]");
+const aboutMenuItem = document.querySelector("div[id=about-menu-item]");
 const newDialog = document.querySelector("dialog[id=new-dialog]");
 const noDrawingDialog = document.querySelector("dialog[id=no-drawing-dialog]");
 const aboutDialog = document.querySelector("dialog[id=about-dialog]");

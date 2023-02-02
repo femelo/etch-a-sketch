@@ -77,14 +77,14 @@ a {
     flex-basis: 15vw;
 }
 
-#rightmost-item {
+#about-menu-item {
     color: white;
     margin: 0px 5vw;
     /* font-size: 24px; */
     font-weight: 600;
 }
 
-#rightmost-item:hover {
+#about-menu-item:hover {
     background-color: rgb(70, 113, 241);
 }
 
