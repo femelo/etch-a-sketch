@@ -19,8 +19,8 @@ const colorSquares = Array.from(document.getElementsByClassName("color-picker"))
 selectedColorSquare.classList.add("black");
 
 // Global variables
-const gridWidthPx = 1120;
-const gridHeightPx = 800;
+const gridWidthPx = Math.round(0.6 * window.innerWidth);
+const gridHeightPx = Math.round(0.8 * window.innerHeight);
 const colorList = ["grey", "red", "orange", "yellow", "greenyellow", "green", "cyan", "blue", "purple", "pink"];
 let selectedColor = "black";
 let drawingAvailable = false;
@@ -110,8 +110,8 @@ function getRandomColor() {
 
 // Create cell grid
 function createCellGrid(cellWidthPx, cellHeightPx) {
-    const width = gridWidthPx / cellWidthPx;
-    const height = gridHeightPx / cellHeightPx;
+    const width = Math.floor(gridWidthPx / cellWidthPx);
+    const height = Math.floor(gridHeightPx / cellHeightPx);
     // Remove old cells
     const gridRows = document.querySelectorAll(".grid-row");
     for (const row of gridRows) {
