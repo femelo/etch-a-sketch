@@ -25,7 +25,12 @@ const colorList = ["grey", "red", "orange", "yellow", "greenyellow", "green", "c
 let selectedColor = "black";
 let drawingAvailable = false;
 
+// Resize elements upon initialization
+resizeOps();
+
 // Add listeners
+// Fow window
+window.addEventListener("resize", resizeOps);
 // For menu items
 newMenuItem.addEventListener("click", () => newDialog.showModal());
 saveMenuItem.addEventListener("click", () => {
@@ -92,6 +97,11 @@ function colorCellByTouch(e) {
 }
 
 // Helper functions
+// Resize element reference
+function resizeOps() {
+    document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+};
+
 // Get random color
 function getRandomColor() {
     const index = Math.floor(colorList.length * Math.random());
